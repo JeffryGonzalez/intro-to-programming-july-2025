@@ -29,4 +29,5 @@ app.Run();
 
 // I will explain this in detail later and you will be bored as heck.
 
+// in .NET 10 (Sept 2025) you won't have to do this any more.
 public partial class Program;
