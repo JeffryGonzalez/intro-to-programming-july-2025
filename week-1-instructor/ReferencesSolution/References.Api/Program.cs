@@ -1,10 +1,13 @@
 
-
-
+using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container. 
+builder.Services.AddMarten(config =>
+{
+    config.Connection("connection string to my database");
+}).UseLightweightSessions();
 
 
 builder.Services.AddControllers();

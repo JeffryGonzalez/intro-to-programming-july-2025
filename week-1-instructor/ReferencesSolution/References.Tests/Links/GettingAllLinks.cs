@@ -11,6 +11,7 @@ public class GettingAllLinks
     {
 
         // GET /links
+
         var host = await AlbaHost.For<Program>();
 
         await host.Scenario(api =>

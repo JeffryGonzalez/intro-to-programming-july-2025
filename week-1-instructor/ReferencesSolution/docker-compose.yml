@@ -4,4 +4,4 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
-      POSTGRES_DB: links
+      POSTGRES_DB: links 
