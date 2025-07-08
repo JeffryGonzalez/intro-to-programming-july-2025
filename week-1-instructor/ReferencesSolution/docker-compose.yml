@@ -7,3 +7,6 @@ services:
       POSTGRES_DB: links 
     ports:
       - 5432:5432
+  mongo:
+    image: mongodb/mongodb-community-server:7.0.17-ubi9
+
