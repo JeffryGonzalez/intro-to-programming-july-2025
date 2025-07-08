@@ -3,10 +3,14 @@ using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("links")
+    ?? throw new Exception("No Connection String");
+
+
 // Add services to the container. 
 builder.Services.AddMarten(config =>
 {
-    config.Connection("connection string to my database");
+    config.Connection(connectionString);
 }).UseLightweightSessions();
 
 
