@@ -1,6 +1,6 @@
 
 
-using References.Api;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,3 +25,8 @@ app.UseAuthorization();
 app.MapControllers();  // Reflection the ability to have code that looks at itself.
 
 app.Run();
+
+
+// I will explain this in detail later and you will be bored as heck.
+
+public partial class Program;
