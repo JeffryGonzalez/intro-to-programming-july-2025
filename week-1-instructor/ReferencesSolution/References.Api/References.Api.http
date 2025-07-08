@@ -12,6 +12,6 @@ Accept: application/json
 Content-Type: application/json 
 
 {
-    "href": "https://github.com",
-    "description": "Microsoft's Github Main Site"
+    "href": "https://www.hypertheory.com",
+    "description": "Best dang training Main Site"
 }
