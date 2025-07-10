@@ -10,19 +10,24 @@ public class Calculator
             return 0;
         }
 
-        if(numbers.StartsWith("//"))
+        if (HasCustomDelimeters(numbers))
         {
 
             var delimeter = numbers[2];
             delimeters.Add(delimeter);
-            numbers = numbers.Substring(4);
-           
+            numbers = numbers[4..];
+
         }
- 
-        return numbers.Split(delimeters.ToArray()) //string[]
+
+        return numbers.Split([.. delimeters]) //string[]
              .Select(int.Parse) // int[]
              .Sum();
 
 
+    }
+
+    private static bool HasCustomDelimeters(string numbers)
+    {
+        return numbers.StartsWith("//");
     }
 }
