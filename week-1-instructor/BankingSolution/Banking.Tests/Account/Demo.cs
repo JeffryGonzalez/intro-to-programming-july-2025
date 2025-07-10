@@ -1,5 +1,6 @@
 ﻿
 using Banking.Domain;
+using Banking.Tests.TestDoubles;
 
 namespace Banking.Tests.Account;
 
@@ -8,11 +9,11 @@ public class Demo
     [Fact]
     public void SomeDemo()
     {
-        var barbsAccount = new BankAccount();
+        var barbsAccount = new BankAccount(new DummyBonusCalculator());
         //BankAccount barbsAccount = new();
 
 
-        BankAccount stansAccount = new BankAccount();
+        BankAccount stansAccount = new BankAccount(new DummyBonusCalculator());
 
         Assert.Equal(barbsAccount.GetBalance(), stansAccount.GetBalance());
 
@@ -44,7 +45,7 @@ public class Demo
 
         Assert.Equal<TransactionAmount>(42M, added);
 
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
       Assert.Throws<InvalidTransactionAmountException>(() => account.Deposit(-32));
     }
 }
