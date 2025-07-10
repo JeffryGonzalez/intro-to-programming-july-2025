@@ -26,7 +26,7 @@ public class Calculator
 
     }
 
-    private static bool HasCustomDelimeters(string numbers)
+    private bool HasCustomDelimeters(string numbers)
     {
         return numbers.StartsWith("//");
     }
