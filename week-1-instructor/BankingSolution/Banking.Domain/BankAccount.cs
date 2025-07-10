@@ -8,11 +8,11 @@ public class BankAccount
 
 
     private decimal _currentBalance = 7000;
-    public void Deposit(TransactionAmount amountToDeposit)
+    public virtual void Deposit(TransactionAmount amountToDeposit)
     {
 
         //_currentBalance = _currentBalance + amountToDeposit;
-        _currentBalance += amountToDeposit + 10;
+        _currentBalance += amountToDeposit ;
        
     }
 
