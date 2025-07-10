@@ -45,6 +45,6 @@ public class Demo
         Assert.Equal<TransactionAmount>(42M, added);
 
         var account = new BankAccount();
-       account.Deposit(-32);
+      Assert.Throws<InvalidTransactionAmountException>(() => account.Deposit(-32));
     }
 }
