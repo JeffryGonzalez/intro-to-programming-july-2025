@@ -10,6 +10,7 @@ public class BankAccount
     private decimal _currentBalance = 7000;
     public void Deposit(TransactionAmount amountToDeposit)
     {
+
         //_currentBalance = _currentBalance + amountToDeposit;
         _currentBalance += amountToDeposit;
        
@@ -25,4 +26,6 @@ public class BankAccount
     {
        _currentBalance -= amountToWithdraw;
     }
+
+  
 }

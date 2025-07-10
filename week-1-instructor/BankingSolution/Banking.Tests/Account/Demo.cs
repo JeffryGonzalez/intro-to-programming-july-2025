@@ -32,4 +32,19 @@ public class Demo
         
 
     }
+
+    [Fact]
+    public void Implicit()
+    {
+        TransactionAmount t1 = 32.00M;
+        var t2 = 10M;
+
+       
+        var added = t1 += t2;
+
+        Assert.Equal<TransactionAmount>(42M, added);
+
+        var account = new BankAccount();
+       account.Deposit(-32);
+    }
 }
