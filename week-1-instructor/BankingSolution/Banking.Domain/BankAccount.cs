@@ -13,7 +13,7 @@ public class BankAccount
        
     }
 
-    public decimal GetBalance()
+    public decimal GetBalance() 
     {
         
         return _currentBalance;
