@@ -12,7 +12,7 @@ public class GoldAccountDeposits
         var account = new BankAccount();
         var openingBalance = account.GetBalance();
 
-        account.Deposit(100M);
+        account.Deposit(100M, AccountTypes.GoldAccount);
 
         Assert.Equal(openingBalance + 110M, account.GetBalance());
         
