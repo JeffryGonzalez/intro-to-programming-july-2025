@@ -5,7 +5,15 @@ import (
 	"strings"
 )
 
-func Add(numbers string) int {
+type Logger struct {
+	write func(string) error
+}
+
+type WebService struct {
+	notify func(string) error
+}
+
+func Add(numbers string, logger *Logger, webService *WebService) int {
 	if numbers == "" {
 		return 0
 	} else {
@@ -35,6 +43,12 @@ func Add(numbers string) int {
 				panic("Invalid input: " + p)
 			}
 			sum += num
+		}
+		if logger != nil {
+			err := logger.write(numbers)
+			if err != nil && webService != nil {
+				webService.notify(strconv.Itoa(sum))
+			}
 		}
 		return sum
 	}

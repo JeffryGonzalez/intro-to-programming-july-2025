@@ -5,7 +5,7 @@ import (
 )
 
 func TestEmptyStringReturnsZero(t *testing.T) {
-	var result = Add("")
+	var result = Add("", DummyLogger, nil)
 	if result != 0 {
 		t.Error("Empty String Should be Zero")
 	}
@@ -22,7 +22,7 @@ func TestSingleDigit(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.input, func(t *testing.T) {
-			actual := Add(tc.input)
+			actual := Add(tc.input, DummyLogger, nil)
 			if actual != tc.expected {
 				t.Errorf("For input %v, expected %q, but got %q", tc.input, tc.expected, actual)
 			}
@@ -41,7 +41,7 @@ func TestTwoDigits(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.input, func(t *testing.T) {
-			actual := Add(tc.input)
+			actual := Add(tc.input, DummyLogger, nil)
 			if actual != tc.expected {
 				t.Errorf("For input %v, expected %q, but got %q", tc.input, tc.expected, actual)
 			}
@@ -59,7 +59,7 @@ func TestArbitraryDigits(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.input, func(t *testing.T) {
-			actual := Add(tc.input)
+			actual := Add(tc.input, DummyLogger, nil)
 			if actual != tc.expected {
 				t.Errorf("For input %v, expected %q, but got %q", tc.input, tc.expected, actual)
 			}
@@ -77,7 +77,7 @@ func TestMixedDelimeters(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.input, func(t *testing.T) {
-			actual := Add(tc.input)
+			actual := Add(tc.input, DummyLogger, nil)
 			if actual != tc.expected {
 				t.Errorf("For input %v, expected %q, but got %q", tc.input, tc.expected, actual)
 			}
@@ -97,7 +97,7 @@ func TestCustomDelimeter(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.input, func(t *testing.T) {
-			actual := Add(tc.input)
+			actual := Add(tc.input, DummyLogger, nil)
 			if actual != tc.expected {
 				t.Errorf("For input %v, expected %q, but got %q", tc.input, tc.expected, actual)
 			}
