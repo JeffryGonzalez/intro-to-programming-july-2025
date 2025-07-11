@@ -91,6 +91,8 @@ func TestCustomDelimeter(t *testing.T) {
 		expected int
 	}{
 		{input: "//;\n1;2;3", expected: 6},
+		{input: "//|\n1|2|3", expected: 6},
+		{input: "//*\n1,2*3", expected: 6},
 	}
 
 	for _, tc := range cases {
