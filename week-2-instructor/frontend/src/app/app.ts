@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 
-import { WelcomeComponent } from './components/welcome.component';
-
 @Component({
   selector: 'app-root',
   template: `
-    <main class="container mx-auto">
-      <app-welcome />
-    </main>
+    <h1 class="text-3xl font-black text-orange-400">Welcome to My App</h1>
+    <main class="container mx-auto"></main>
   `,
   styles: [],
-  imports: [WelcomeComponent],
+  imports: [],
 })
 export class App {}
