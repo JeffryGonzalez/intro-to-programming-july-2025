@@ -3,6 +3,7 @@ import {
   patchState,
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withProps,
   withState,
@@ -39,5 +40,13 @@ export const CounterStore = signalStore(
       decrementDisabled: computed(() => store.current() - store.by() < 0),
       isEven: computed(() => store.current() % 2 === 0),
     };
+  }),
+  withHooks({
+    onInit() {
+      console.log('Created the CounterStore');
+    },
+    onDestroy() {
+      console.log('Destroying the Counter Store');
+    },
   }),
 );
