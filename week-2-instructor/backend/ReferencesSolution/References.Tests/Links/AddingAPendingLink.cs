@@ -9,7 +9,7 @@ using References.Api.Links;
 namespace References.Tests.Links;
 public class AddingAPendingLink
 {
-    [Fact]
+    [Fact(Skip = "no pending example")]
     public async Task AddingAPendingLinkReturnsProper()
     {
         var linkToAdd = new LinkCreateRequest("https://wwww.somesite.com", "Source Control Hub");

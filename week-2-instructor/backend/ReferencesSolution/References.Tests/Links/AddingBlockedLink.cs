@@ -12,7 +12,7 @@ public class AddingBlockedLink
     [Fact]
     public async Task AddingABlockedLinkGivesYouAFailure()
     {
-        var linkToAdd = new LinkCreateRequest("https://wwww.somesite.com", "Source Control Hub");
+        var linkToAdd = new LinkCreateRequest("https://wwww.geico.com", "Source Control Hub");
         var dummyLinkValidator = Substitute.For<IValidateLinksWithSecurity>();
        
         var host = await AlbaHost.For<Program>(config =>
