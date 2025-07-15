@@ -2,6 +2,7 @@ import { computed } from '@angular/core';
 import {
   patchState,
   signalStore,
+  watchState,
   withComputed,
   withHooks,
   withMethods,
@@ -42,8 +43,16 @@ export const CounterStore = signalStore(
     };
   }),
   withHooks({
-    onInit() {
-      console.log('Created the CounterStore');
+    onInit(store) {
+      const savedState = localStorage.getItem('counter-data'); // "string" | null
+      if (savedState !== null) {
+        const newState = JSON.parse(savedState) as unknown as SignalState; // using "as" is SUSPECT. Be careful here.
+        patchState(store, newState);
+      }
+
+      watchState(store, (current) => {
+        localStorage.setItem('counter-data', JSON.stringify(current));
+      });
     },
     onDestroy() {
       console.log('Destroying the Counter Store');
