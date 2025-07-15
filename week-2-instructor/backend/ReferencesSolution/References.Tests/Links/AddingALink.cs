@@ -21,16 +21,9 @@ public class AddingALink
         // THEN I'm going to do a GET request to /links and see if that new link I just added is in the list of links.
 
         var linkToAdd = new LinkCreateRequest("https://wwww.github.com", "Source Control Hub");
-        var dummyLinkValidator = Substitute.For<IValidateLinksWithSecurity>();
-        dummyLinkValidator
-            .ValidateLinkAsync(Arg.Any<LinkValidationRequest>())
-            .Returns(Task.FromResult(new LinkValidationResponse(LinkStatus.Good)));
         var host = await AlbaHost.For<Program>(config =>
         {
-            config.ConfigureTestServices(services =>
-            {
-                services.AddScoped(_ => dummyLinkValidator);
-            });
+           
         });
 
        var postResponse =  await host.Scenario(api =>

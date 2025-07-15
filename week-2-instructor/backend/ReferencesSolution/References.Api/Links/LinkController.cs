@@ -2,6 +2,7 @@
 using Marten;
 using Microsoft.AspNetCore.Mvc;
 using References.Api.External;
+using Shared;
 
 namespace References.Api.Links;
 

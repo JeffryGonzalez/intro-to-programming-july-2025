@@ -15,17 +15,12 @@ public class GettingAllLinks
     {
 
         // GET /links
-        var dummyLinkValidator = Substitute.For<IValidateLinksWithSecurity>();
-        dummyLinkValidator
-            .ValidateLinkAsync(Arg.Any<LinkValidationRequest>())
-            .Returns(Task.FromResult(new LinkValidationResponse(LinkStatus.Good)));
+       
+     
        
         var host = await AlbaHost.For<Program>(config =>
         {
-            config.ConfigureTestServices(services =>
-            {
-                services.AddScoped<IValidateLinksWithSecurity>(_ => dummyLinkValidator);
-            });
+           
         });
 
         await host.Scenario(api =>
