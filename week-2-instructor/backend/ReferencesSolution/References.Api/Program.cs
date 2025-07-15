@@ -10,6 +10,16 @@ var connectionString = builder.Configuration.GetConnectionString("links")
 
 // Add services to the container. 
 
+builder.Services.AddCors(config =>
+{
+    // NOTE: This isn't something you come up with, talk to your team, security folks, etc.
+    config.AddDefaultPolicy(pol =>
+    {
+        pol.AllowAnyOrigin();
+        pol.AllowAnyMethod();
+        pol.AllowAnyHeader();
+    });
+});
 
 builder.Services.AddMarten(config =>
 {
@@ -35,17 +45,19 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+
+
+app.UseAuthorization();
+
+
+app.MapControllers();  // Reflection the ability to have code that looks at itself.
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseAuthorization();
-
-
-app.MapControllers();  // Reflection the ability to have code that looks at itself.
-
+app.UseCors();
 app.Run();
 
 
