@@ -1,10 +1,44 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { LinksStore } from '../services/links-store';
 
 @Component({
   selector: 'app-links-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
-  template: ` <p>List of Links Will Go Here</p> `,
+  template: `
+    <p>List of Links Will Go Here iS tHIS THING ON!1/1</p>
+
+    <div
+      class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
+    >
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Link</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+
+          @for (link of store.entities(); track link.id) {
+            <tr>
+              <th>{{ link.id }}</th>
+              <td>{{ link.href }}</td>
+              <td>{{ link.description }}</td>
+            </tr>
+          } @empty {
+            <p>No links available.</p>
+          }
+          <!-- row 2 -->
+        </tbody>
+      </table>
+    </div>
+  `,
   styles: ``,
 })
-export class List {}
+export class List {
+  store = inject(LinksStore);
+}

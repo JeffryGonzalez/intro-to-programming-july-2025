@@ -2,7 +2,7 @@ import { http, delay, HttpResponse } from 'msw';
 
 export const LinksHandlers = [
   http.get('http://api.realsever-but-not-really.com/links', async () => {
-    await delay(2000); // 100ms - 200ms
+    await delay(); // 100ms - 200ms
     //return HttpResponse.json([]);
     return HttpResponse.json([
       {
