@@ -1,13 +1,38 @@
-import { inject } from '@angular/core';
-import { patchState, signalStore, withHooks, withMethods } from '@ngrx/signals';
+import { computed, inject } from '@angular/core';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { setEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap, pipe, tap } from 'rxjs';
 import { LinkApiItem, LinksApiService } from './links-api';
-
+type LinkSortState = {
+  sortingBy: 'href' | 'description';
+};
 export const LinksStore = signalStore(
   withEntities<LinkApiItem>(),
-
+  withState<LinkSortState>({
+    sortingBy: 'href',
+  }),
+  withComputed((store) => {
+    return {
+      sortedEntities: computed(() => {
+        const entities = store.entities();
+        return [...entities].sort((a, b) => {
+          if (store.sortingBy() === 'href') {
+            return a.href.localeCompare(b.href);
+          } else {
+            return a.description.localeCompare(b.description);
+          }
+        });
+      }),
+    };
+  }),
   withMethods((store) => {
     const service = inject(LinksApiService);
     return {

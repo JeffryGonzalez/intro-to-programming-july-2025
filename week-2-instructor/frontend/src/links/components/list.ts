@@ -16,14 +16,18 @@ import { LinksStore } from '../services/links-store';
         <thead>
           <tr>
             <th></th>
-            <th>Link</th>
-            <th>Description</th>
+            <th>
+              <button disabled class="btn btn-sm btn-primary">URL</button>
+            </th>
+            <th>
+              <button class="btn btn-sm btn-primary">Descriptions</button>
+            </th>
           </tr>
         </thead>
         <tbody>
           <!-- row 1 -->
 
-          @for (link of store.entities(); track link.id) {
+          @for (link of store.sortedEntities(); track link.id) {
             <tr>
               <th>{{ link.id }}</th>
               <td>{{ link.href }}</td>
