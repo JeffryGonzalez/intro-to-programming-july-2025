@@ -11,8 +11,10 @@ import { setEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap, pipe, tap } from 'rxjs';
 import { LinkApiItem, LinksApiService } from './links-api';
+
+type SortOptions = 'href' | 'description';
 type LinkSortState = {
-  sortingBy: 'href' | 'description';
+  sortingBy: SortOptions;
 };
 export const LinksStore = signalStore(
   withEntities<LinkApiItem>(),
@@ -36,6 +38,8 @@ export const LinksStore = signalStore(
   withMethods((store) => {
     const service = inject(LinksApiService);
     return {
+      setSortingBy: (sortingBy: SortOptions) =>
+        patchState(store, { sortingBy }),
       _load: rxMethod<void>(
         pipe(
           exhaustMap(() =>

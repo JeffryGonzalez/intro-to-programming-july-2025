@@ -17,10 +17,22 @@ import { LinksStore } from '../services/links-store';
           <tr>
             <th></th>
             <th>
-              <button disabled class="btn btn-sm btn-primary">URL</button>
+              <button
+                (click)="store.setSortingBy('href')"
+                [disabled]="store.sortingBy() === 'href'"
+                class="btn btn-sm btn-primary"
+              >
+                URL
+              </button>
             </th>
             <th>
-              <button class="btn btn-sm btn-primary">Descriptions</button>
+              <button
+                (click)="store.setSortingBy('description')"
+                [disabled]="store.sortingBy() === 'description'"
+                class="btn btn-sm btn-primary"
+              >
+                Descriptions
+              </button>
             </th>
           </tr>
         </thead>
