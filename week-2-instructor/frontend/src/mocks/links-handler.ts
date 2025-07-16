@@ -15,6 +15,36 @@ export const LinksHandlers = [
         href: 'https://www.hypertheory.com',
         description: 'Great training',
       },
+      {
+        id: '3',
+        href: 'https://www.angular.io',
+        description: 'Angular Framework',
+      },
+      {
+        id: '4',
+        href: 'https://www.reactjs.org',
+        description: 'React Framework',
+      },
+      {
+        id: '5',
+        href: 'https://www.vuejs.org',
+        description: 'Vue Framework',
+      },
+      {
+        id: '6',
+        href: 'https://www.svelte.dev',
+        description: 'Svelte Framework',
+      },
+      {
+        id: '7',
+        href: 'https://www.nextjs.org',
+        description: 'Next.js Framework',
+      },
+      {
+        id: '8',
+        href: 'https://www.nuxtjs.org',
+        description: 'Nuxt.js Framework',
+      },
     ]);
   }),
 ];
