@@ -12,6 +12,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap, pipe, tap } from 'rxjs';
 import { LinkApiItem, LinksApiService } from './links-api';
 
+export type ApiLinkCreateItem = Omit<LinkApiItem, 'id'>;
+
 type SortOptions = 'href' | 'description';
 type LinkSortState = {
   sortingBy: SortOptions;
@@ -38,6 +40,7 @@ export const LinksStore = signalStore(
   withMethods((store) => {
     const service = inject(LinksApiService);
     return {
+      addLink: (link: ApiLinkCreateItem) => console.log('Adding link:', link),
       setSortingBy: (sortingBy: SortOptions) =>
         patchState(store, { sortingBy }),
       _load: rxMethod<void>(

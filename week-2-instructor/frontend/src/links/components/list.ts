@@ -6,8 +6,6 @@ import { LinksStore } from '../services/links-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
-    <p>List of Links Will Go Here iS tHIS THING ON!1/1</p>
-
     <div
       class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
     >
