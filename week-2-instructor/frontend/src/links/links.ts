@@ -1,15 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { List } from './components/list';
-import { Add } from './components/add';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-links',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [List, Add],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="flex flex-row gap-4">
-      <app-links-list />
-      <app-links-add />
+      <a
+        class="btn btn-primary"
+        routerLink="add"
+        [routerLinkActive]="['uppercase', 'text-black']"
+        >Add A New Link</a
+      >
+      <a class="btn btn-primary" routerLink="/links">Links</a>
+    </div>
+    <div>
+      <router-outlet />
     </div>
   `,
   styles: ``,
