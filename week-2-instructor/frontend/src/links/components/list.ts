@@ -33,6 +33,10 @@ import { RouterLink } from '@angular/router';
             </a>
           </div>
         </li>
+      } @empty {
+        <li class="p-4 text-center text-sm opacity-60">
+          No links shared with you yet.
+        </li>
       }
     </ul>
   `,

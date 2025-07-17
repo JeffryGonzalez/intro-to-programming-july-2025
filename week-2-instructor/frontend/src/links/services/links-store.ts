@@ -18,6 +18,11 @@ import {
 import { LinkApiItem, LinksApiService } from './links-api';
 
 import { tapResponse } from '@ngrx/operators';
+import {
+  setFulfilled,
+  setLoading,
+  withResourceState,
+} from '../../shared/resource-state-feature';
 
 export type ApiLinkCreateItem = Omit<LinkApiItem, 'id'>;
 
@@ -28,6 +33,7 @@ type LinkSortState = {
 export const LinksStore = signalStore(
   withErrorDisplay(),
   withEntities<LinkApiItem>(),
+  withResourceState(),
   withState<LinkSortState>({
     sortingBy: 'href',
   }),
@@ -65,10 +71,15 @@ export const LinksStore = signalStore(
         patchState(store, { sortingBy }),
       _load: rxMethod<void>(
         pipe(
+          tap(() => patchState(store, setLoading())),
           exhaustMap(() =>
             service
               .getLinks()
-              .pipe(tap((links) => patchState(store, setEntities(links)))),
+              .pipe(
+                tap((links) =>
+                  patchState(store, setEntities(links), setFulfilled),
+                ),
+              ),
           ),
         ),
       ),

@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { http, delay, HttpResponse } from 'msw';
+import { http, delay, HttpResponse, passthrough } from 'msw';
 
 export const LinksHandlers = [
+  // http.get('http://localhost:1337/links', async () => {
+  //   await delay(5000);
+  //   return HttpResponse.json([]);
+  //   passthrough();
+  // }),
   http.post(
     'http://api.realsever-but-not-really.com/links',
     async ({ request }) => {
