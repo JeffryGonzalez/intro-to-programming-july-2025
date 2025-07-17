@@ -10,7 +10,14 @@ import {
 import { addEntity, setEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { exhaustMap, mergeMap, pipe, tap } from 'rxjs';
+import {
+  clearError,
+  setError,
+  withErrorDisplay,
+} from './error-display-feature';
 import { LinkApiItem, LinksApiService } from './links-api';
+
+import { tapResponse } from '@ngrx/operators';
 
 export type ApiLinkCreateItem = Omit<LinkApiItem, 'id'>;
 
@@ -19,6 +26,7 @@ type LinkSortState = {
   sortingBy: SortOptions;
 };
 export const LinksStore = signalStore(
+  withErrorDisplay(),
   withEntities<LinkApiItem>(),
   withState<LinkSortState>({
     sortingBy: 'href',
@@ -40,12 +48,16 @@ export const LinksStore = signalStore(
   withMethods((store) => {
     const service = inject(LinksApiService);
     return {
+      clearError: () => patchState(store, clearError()),
       addLink: rxMethod<ApiLinkCreateItem>(
         pipe(
           mergeMap((link) =>
-            service
-              .addLink(link)
-              .pipe(tap((r) => patchState(store, addEntity(r)))),
+            service.addLink(link).pipe(
+              tapResponse(
+                (newLink) => patchState(store, addEntity(newLink)),
+                () => patchState(store, setError('Failed adding ' + link.href)),
+              ),
+            ),
           ),
         ),
       ),
