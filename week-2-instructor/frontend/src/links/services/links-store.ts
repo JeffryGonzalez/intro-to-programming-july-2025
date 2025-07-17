@@ -7,9 +7,9 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { setEntities, withEntities } from '@ngrx/signals/entities';
+import { addEntity, setEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { exhaustMap, pipe, tap } from 'rxjs';
+import { exhaustMap, mergeMap, pipe, tap } from 'rxjs';
 import { LinkApiItem, LinksApiService } from './links-api';
 
 export type ApiLinkCreateItem = Omit<LinkApiItem, 'id'>;
@@ -40,7 +40,15 @@ export const LinksStore = signalStore(
   withMethods((store) => {
     const service = inject(LinksApiService);
     return {
-      addLink: (link: ApiLinkCreateItem) => console.log('Adding link:', link),
+      addLink: rxMethod<ApiLinkCreateItem>(
+        pipe(
+          mergeMap((link) =>
+            service
+              .addLink(link)
+              .pipe(tap((r) => patchState(store, addEntity(r)))),
+          ),
+        ),
+      ),
       setSortingBy: (sortingBy: SortOptions) =>
         patchState(store, { sortingBy }),
       _load: rxMethod<void>(
